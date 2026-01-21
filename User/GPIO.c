@@ -5,23 +5,23 @@
 // #include "BOMA.h"
 #include "debug.h"
 
-// ÆôÓÃÊ±ÖÓ
+// å¯ç”¨æ—¶é’Ÿ
 void MCU_GPIO_Init(void)
 {   
     
     GPIO_InitTypeDef GPIO_InitStructure = {0};
     I2C_InitTypeDef I2C_InitStructure = {0};
-    // 1. ¿ªÆô AFIO Ê±ÖÓ
+    // 1. å¼€å¯ AFIO æ—¶é’Ÿ
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
 
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC | RCC_APB2Periph_GPIOD, ENABLE);
-    // ÆôÓÃI2CÊ±ÖÓ
+    // å¯ç”¨I2Cæ—¶é’Ÿ
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C2,ENABLE);
-    //ÆôÓÃADCÊ±ÖÓ
+    //å¯ç”¨ADCæ—¶é’Ÿ
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
 
     RCC_ADCCLKConfig(RCC_PCLK2_Div8);
-    //MCP41010Ğ¾Æ¬µØÖ·¿ØÖÆÒı½Å
+    //MCP41010èŠ¯ç‰‡åœ°å€æ§åˆ¶å¼•è„š
     GPIO_InitStructure.GPIO_Pin = MCP_CS2;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -36,13 +36,13 @@ void MCU_GPIO_Init(void)
     GPIO_Init(GPIOB, &GPIO_InitStructure);
 
 
-    // ÅäÖÃ½ÚµãĞòºÅ²¦Âë¿ª¹ØµÄGPIO¿Ú
+    // é…ç½®èŠ‚ç‚¹åºå·æ‹¨ç å¼€å…³çš„GPIOå£
     GPIO_InitStructure.GPIO_Pin = BOMA_PORT1;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
     // uint16_t pa15_state = GPIOA->INDR & GPIO_Pin_15;
-    // printf("PA15 raw state: 0x%04X\n", pa15_state);  // Õı³£Ó¦Îª 0x0000£¨µÍ£©»ò 0x8000£¨¸ß£©
+    // printf("PA15 raw state: 0x%04X\n", pa15_state);  // æ­£å¸¸åº”ä¸º 0x0000ï¼ˆä½ï¼‰æˆ– 0x8000ï¼ˆé«˜ï¼‰
 
     GPIO_InitStructure.GPIO_Pin = BOMA_PORT6|BOMA_PORT7|BOMA_PORT8;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
@@ -59,7 +59,7 @@ void MCU_GPIO_Init(void)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOD, &GPIO_InitStructure);
 
-    // ÅäÖÃ»úÏäĞòºÅ²¦Âë¿ª¹ØµÄGPIO¿Ú
+    // é…ç½®æœºç®±åºå·æ‹¨ç å¼€å…³çš„GPIOå£
     GPIO_InitStructure.GPIO_Pin = BOMA_BOX2|BOMA_BOX3;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -76,13 +76,13 @@ void MCU_GPIO_Init(void)
     GPIO_Init(GPIOC, &GPIO_InitStructure);
 
 
-    // ¹âµç³ØÊıÁ¿²¦Âë¿ª¹ØµÄGPIO¿Ú
+    // å…‰ç”µæ± æ•°é‡æ‹¨ç å¼€å…³çš„GPIOå£
     GPIO_InitStructure.GPIO_Pin = BOMA_PD1|BOMA_PD2|BOMA_PD3|BOMA_PD4;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-    // ADCĞ¾Æ¬µØÖ·Î»
+    // ADCèŠ¯ç‰‡åœ°å€ä½
     GPIO_InitStructure.GPIO_Pin = ADS1;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -98,7 +98,7 @@ void MCU_GPIO_Init(void)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
 
-    // DS18B20µ¥×ÜÏß
+    GPIO_InitStructure.GPIO_Pin = I2C2_SCL|I2C2_SDA;
     GPIO_InitStructure.GPIO_Pin = DS18B20_PIN1;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -113,7 +113,7 @@ void MCU_GPIO_Init(void)
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
-    //ADCĞ¾Æ¬I2C
+    //ADCèŠ¯ç‰‡I2C
     GPIO_InitStructure.GPIO_Pin = ADC_SCL|ADC_SDA;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -135,28 +135,28 @@ void MCU_GPIO_Init(void)
     GPIO_SetBits(GPIOB, MCP_CS3 | MCP_CS4);
 
     //SPI
-    //GPIOB³õÊ¼»¯ÉèÖÃ
+    //GPIOBåˆå§‹åŒ–è®¾ç½®
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_8;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;          // ÍÆÍìÊä³öÄ£Ê½
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;        // ×î¸ßÖ§³Ö100MHz
-    GPIO_Init(GPIOB, &GPIO_InitStructure);                    // Ó¦ÓÃÅäÖÃ
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;          // æ¨æŒ½è¾“å‡ºæ¨¡å¼
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;        // æœ€é«˜æ”¯æŒ100MHz
+    GPIO_Init(GPIOB, &GPIO_InitStructure);                    // åº”ç”¨é…ç½®
 
-    // ³õÊ¼»¯ºóÖÃµÍµçÆ½
-    GPIO_ResetBits(GPIOB, GPIO_Pin_9 | GPIO_Pin_8);         // PB9, PB8ÖÃµÍ
-    //BROKE¶¨Òå
+    // åˆå§‹åŒ–åç½®ä½ç”µå¹³
+    GPIO_ResetBits(GPIOB, GPIO_Pin_9 | GPIO_Pin_8);         // PB9, PB8ç½®ä½
+    //BROKEå®šä¹‰
     GPIO_InitStructure.GPIO_Pin = BROKE1;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;         
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;        // ×î¸ßÖ§³Ö100MHz
-    GPIO_Init(GPIOA, &GPIO_InitStructure);                    // Ó¦ÓÃÅäÖÃ
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;        // æœ€é«˜æ”¯æŒ100MHz
+    GPIO_Init(GPIOA, &GPIO_InitStructure);                    // åº”ç”¨é…ç½®
     
     GPIO_InitStructure.GPIO_Pin = BROKE2;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;         
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;        // ×î¸ßÖ§³Ö100MHz
-    GPIO_Init(GPIOC, &GPIO_InitStructure);                    // Ó¦ÓÃÅäÖÃ
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;        // æœ€é«˜æ”¯æŒ100MHz
+    GPIO_Init(GPIOC, &GPIO_InitStructure);                    // åº”ç”¨é…ç½®
     
     GPIO_InitStructure.GPIO_Pin = BROKE3 | BROKE4;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;         
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;        // ×î¸ßÖ§³Ö100MHz
-    GPIO_Init(GPIOB, &GPIO_InitStructure);                    // Ó¦ÓÃÅäÖÃ
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;        // æœ€é«˜æ”¯æŒ100MHz
+    GPIO_Init(GPIOB, &GPIO_InitStructure);                    // åº”ç”¨é…ç½®
     
 }

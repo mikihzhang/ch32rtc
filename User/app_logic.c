@@ -579,8 +579,8 @@ static void i2c2_bus_recover_if_needed(void)
     if (EXT_RTC_I2C != I2C2) return;
 
     // Read current line levels
-    uint8_t scl = GPIO_ReadInputDataBit(GPIOB, ADC_SCL) ? 1 : 0;
-    uint8_t sda = GPIO_ReadInputDataBit(GPIOB, ADC_SDA) ? 1 : 0;
+    uint8_t scl = GPIO_ReadInputDataBit(GPIOB, I2C2_SCL) ? 1 : 0;
+    uint8_t sda = GPIO_ReadInputDataBit(GPIOB, I2C2_SDA) ? 1 : 0;
 
     if (scl && sda) return; // bus looks idle
 
@@ -592,29 +592,29 @@ static void i2c2_bus_recover_if_needed(void)
     I2C_Cmd(I2C2, DISABLE);
 
     // Configure PB10/PB11 as open-drain outputs
-    g.GPIO_Pin = ADC_SCL | ADC_SDA;
+    g.GPIO_Pin = I2C2_SCL | I2C2_SDA;
     g.GPIO_Mode = GPIO_Mode_Out_OD;
     g.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOB, &g);
 
     // Release both lines (drive high -> OD release)
-    GPIO_SetBits(GPIOB, ADC_SCL | ADC_SDA);
+    GPIO_SetBits(GPIOB, I2C2_SCL | I2C2_SDA);
     Delay_Us(5);
 
     // Clock out 9 pulses on SCL to free a stuck slave
     for (int i = 0; i < 9; i++) {
-        GPIO_ResetBits(GPIOB, ADC_SCL);
+        GPIO_ResetBits(GPIOB, I2C2_SCL);
         Delay_Us(5);
-        GPIO_SetBits(GPIOB, ADC_SCL);
+        GPIO_SetBits(GPIOB, I2C2_SCL);
         Delay_Us(5);
     }
 
     // Issue a STOP: SDA low while SCL high, then SDA high
-    GPIO_SetBits(GPIOB, ADC_SCL);
+    GPIO_SetBits(GPIOB, I2C2_SCL);
     Delay_Us(5);
-    GPIO_ResetBits(GPIOB, ADC_SDA);
+    GPIO_ResetBits(GPIOB, I2C2_SDA);
     Delay_Us(5);
-    GPIO_SetBits(GPIOB, ADC_SDA);
+    GPIO_SetBits(GPIOB, I2C2_SDA);
     Delay_Us(5);
 
     // Restore PB10/PB11 to I2C AF open-drain
