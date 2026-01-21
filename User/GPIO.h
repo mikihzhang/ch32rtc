@@ -2,7 +2,7 @@
 #define _GPIO_H
 extern uint16_t stop_flag;
 
-//½Úµã²¦Âë¿ª¹Ø
+//èŠ‚ç‚¹æ‹¨ç å¼€å…³
 #define BOMA_PORT1   GPIO_Pin_15 //PA15
 #define BOMA_PORT2   GPIO_Pin_10 //PC10
 #define BOMA_PORT3   GPIO_Pin_11 //PC11
@@ -12,7 +12,7 @@ extern uint16_t stop_flag;
 #define BOMA_PORT7   GPIO_Pin_4  //PB4
 #define BOMA_PORT8   GPIO_Pin_5  //PB5
 
-//»úÏä²¦Âë¿ª¹Ø
+//æœºç®±æ‹¨ç å¼€å…³
 #define BOMA_BOX1   GPIO_Pin_2 //PB2
 #define BOMA_BOX2   GPIO_Pin_1 //PA1
 #define BOMA_BOX3   GPIO_Pin_0 //PA0
@@ -20,24 +20,24 @@ extern uint16_t stop_flag;
 #define BOMA_BOX5   GPIO_Pin_14  //PC14
 #define BOMA_BOX6   GPIO_Pin_13  //PC13
 
-//¹âµç³ØÊıÁ¿²¦Âë¿ª¹Ø
+//å…‰ç”µæ± æ•°é‡æ‹¨ç å¼€å…³
 #define BOMA_PD1   GPIO_Pin_9 //PA9
 #define BOMA_PD2   GPIO_Pin_10 //PA10
 #define BOMA_PD3   GPIO_Pin_11 //PA11
 #define BOMA_PD4   GPIO_Pin_12  //PA12
 
-//CSÒı½Å¿ØÖÆMCP41010Ğ¾Æ¬µØÖ·
-#define MCP_CS1   GPIO_Pin_7     //PA7
+#define I2C2_SCL GPIO_Pin_10     // PB10
+#define I2C2_SDA GPIO_Pin_11     // PB11 
 #define MCP_CS2   GPIO_Pin_3     //PC3
 #define MCP_CS3   GPIO_Pin_1     //PB1
 #define MCP_CS4   GPIO_Pin_12    //PB12
 
-//Í¨¶Ï¿ØÖÆ
+//é€šæ–­æ§åˆ¶
 #define BROKE1   GPIO_Pin_6     //PA6
 #define BROKE2   GPIO_Pin_2     //PC2
 #define BROKE3   GPIO_Pin_0     //PB0
 #define BROKE4   GPIO_Pin_13      //PB13
-//ADSĞ¾Æ¬µØÖ·¿ØÖÆ
+//ADSèŠ¯ç‰‡åœ°å€æ§åˆ¶
 #define ADS1   GPIO_Pin_4       //PA4
 #define ADS2   GPIO_Pin_0       //PC0
 #define ADS3   GPIO_Pin_4       //PC4
@@ -48,10 +48,10 @@ extern uint16_t stop_flag;
 #define DS18B20_PIN3  GPIO_Pin_5 //PC5
 #define DS18B20_PIN4  GPIO_Pin_14 //PB14
 
-//ADCµÄI2CÒı½Å
+//ADCçš„I2Cå¼•è„š
 #define ADC_SCL GPIO_Pin_10     //PB10
 #define ADC_SDA GPIO_Pin_11     //PB11 
-//ÖĞ¶Ï¶¨Òå
+//ä¸­æ–­å®šä¹‰
 #define EXTI0_IRQHandler        EXTI0_IRQHandler
 #define EXTI1_IRQHandler        EXTI1_IRQHandler
 #define EXTI2_IRQHandler        EXTI2_IRQHandler
